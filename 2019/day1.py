@@ -2,8 +2,10 @@ import math
 
 from typing import Callable
 
+
 def fuel_required(mass: int):
     return math.floor(mass / 3) - 2
+
 
 def fuel_required_until_empty(fn: Callable[[int], int], mass: int):
     new_mass = mass
@@ -16,16 +18,18 @@ def fuel_required_until_empty(fn: Callable[[int], int], mass: int):
 
     return fuel_needed
 
+
 def fuel_required_nofloor(mass: int):
     return (mass // 3) - 2
 
+
 def main():
-    with open('2019/day1_input.txt', 'r') as f:
+    with open("2019/day1_input.txt", "r") as f:
         lines = f.readlines()
 
     fuel_requirements = [
-        fuel_required_until_empty(fuel_required_nofloor, int(x))
-        for x in lines]
+        fuel_required_until_empty(fuel_required_nofloor, int(x)) for x in lines
+    ]
 
     total = 0
     for r in fuel_requirements:
@@ -33,5 +37,6 @@ def main():
 
     print(total)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
