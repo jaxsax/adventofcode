@@ -6,6 +6,7 @@ mkShell {
   buildInputs = [
     rustc
     cargo
+    cargo-edit
     rust-analyzer
     rustfmt
   ];
