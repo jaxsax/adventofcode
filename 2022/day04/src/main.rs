@@ -72,6 +72,10 @@ fn part2(input: &str) {
 
 fn main() {
     let input = include_str!("../input.txt");
+
+    // Generate a range inclusively
+    let thing: Vec<i32> = (0..=10).collect();
+    println!("{:?}", thing);
     part1(input);
     part2(input);
 }
