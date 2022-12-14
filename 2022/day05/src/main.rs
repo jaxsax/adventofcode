@@ -8,6 +8,16 @@ struct Instruction {
 }
 
 fn main() {
+    part1();
+    part2()
+}
+
+struct Input {
+    stacks: Vec<VecDeque<String>>,
+    instructions: Vec<Instruction>,
+}
+
+fn parse_inputs() -> Input {
     let input = include_str!("../input.txt");
     let mut stacks: Vec<VecDeque<String>> = Vec::new();
     let mut instructions: Vec<Instruction> = Vec::new();
@@ -60,25 +70,29 @@ fn main() {
         }
     }
 
-    // part1(&mut stacks, instructions)
-    part2(&mut stacks, instructions)
+    return Input {
+        stacks,
+        instructions,
+    };
 }
 
-fn part2(stacks: &mut Vec<VecDeque<String>>, instructions: Vec<Instruction>) {
-    for instruction in instructions {
+fn part2() {
+    let mut input = parse_inputs();
+    for instruction in input.instructions {
         let mut items: Vec<String> = Vec::new();
         for _ in 0..instruction.amount {
-            let item = stacks[instruction.from - 1].pop_back().unwrap();
-            items.push(item);
+            let item = &mut input.stacks[instruction.from - 1].pop_back().unwrap();
+            items.push(item.to_string());
         }
 
         items.reverse();
         for item in items {
-            stacks[instruction.to - 1].push_back(item);
+            input.stacks[instruction.to - 1].push_back(item);
         }
     }
 
-    let answer = stacks
+    let answer = input
+        .stacks
         .iter()
         .map(|s| s.back().unwrap().to_string())
         .collect::<String>();
@@ -86,15 +100,17 @@ fn part2(stacks: &mut Vec<VecDeque<String>>, instructions: Vec<Instruction>) {
     println!("part 1: {:?}", answer);
 }
 
-fn part1(stacks: &mut Vec<VecDeque<String>>, instructions: Vec<Instruction>) {
-    for instruction in instructions {
+fn part1() {
+    let mut input = parse_inputs();
+    for instruction in input.instructions {
         for _ in 0..instruction.amount {
-            let item = stacks[instruction.from - 1].pop_back().unwrap();
-            stacks[instruction.to - 1].push_back(item);
+            let item = input.stacks[instruction.from - 1].pop_back().unwrap();
+            input.stacks[instruction.to - 1].push_back(item);
         }
     }
 
-    let answer = stacks
+    let answer = input
+        .stacks
         .iter()
         .map(|s| s.back().unwrap().to_string())
         .collect::<String>();
