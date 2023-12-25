@@ -52,7 +52,7 @@ fn extract_digits(i: &str) -> Vec<u32> {
 }
 
 #[cfg(test)]
-mod test {
+mod day01 {
     use crate::{p1, p2};
     use indoc::indoc;
 
