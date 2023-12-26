@@ -1,5 +1,3 @@
-use std::cmp::Ordering;
-
 fn main() {
     println!("{}", p1(include_str!("../../data/02/input")));
     println!("{}", p2(include_str!("../../data/02/input")));
@@ -57,30 +55,6 @@ struct CubeSet {
     red: u32,
     green: u32,
     blue: u32,
-}
-
-impl PartialEq for CubeSet {
-    fn eq(&self, other: &Self) -> bool {
-        self.partial_cmp(other).unwrap() == Ordering::Equal
-    }
-}
-
-impl PartialOrd for CubeSet {
-    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-        if self.red == other.red && self.green == other.green && self.blue == other.blue {
-            return Some(Ordering::Equal);
-        }
-
-        if self.red > other.red || self.green > other.green || self.blue > other.blue {
-            return Some(Ordering::Greater);
-        }
-
-        if self.red < other.red || self.green < other.green || self.blue < other.blue {
-            return Some(Ordering::Less);
-        }
-
-        return None;
-    }
 }
 
 pub fn p2(input: &str) -> u32 {
