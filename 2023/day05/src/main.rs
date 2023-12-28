@@ -41,7 +41,11 @@ fn p2(input: &str) -> usize {
         .flat_map(|x| (x[0]..=x[0] + x[1]))
         .collect::<Vec<u32>>();
     let size: usize = seeds.len();
-    let one_percent = 0.01 * size as f64;
+    let mut one_percent = 0.01 * size as f64;
+    if one_percent < 1.0 {
+        one_percent = 1.0;
+    }
+
     seeds
         .iter()
         .enumerate()
